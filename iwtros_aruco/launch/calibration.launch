@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <arg name="camera_topic" default="/kinect2/hd/image_color" />
+  <arg name="board_width" default="5" />
+  <arg name="board_hight" default="7"/>
+  <arg name="square_size" default="0.03f" doc="In meters" />
+  <arg name="apect_ratio" default="1.0f" />
+  <arg name="flags_type" default="a"/>
+  <!-- zt assume zero tangential distortion
+      p   fix the principal point at the center -->
+  <arg name="n_frames" default="20"/>
+  <arg name="write_extrinsic" default="true" />
+  <arg name="write_points" default="true" />
+  <arg name="outputFilename" default="calibration" />
+  <arg name="outputFile" default="$(find iwtros_aruco)/src/$(arg outputFilename).yaml" />
+
+  <node name="camera_calibration" pkg="iwtros_aruco" type="aruco_calibration_node" output="screen" >
+    <param name="camera_topic" value="$(arg camera_topic)" />
+    <param name="board_width" value="$(arg board_width)" />
+    <param name="board_hight" value="$(arg board_hight)"/>
+    <param name="square_size" value="$(arg square_size)" />
+    <param name="apect_ratio" value="$(arg apect_ratio)" />
+    <param name="flags_type" value="$(arg flags_type)"/>
+    <param name="n_frames" value="$(arg n_frames)"/>
+    <param name="write_extrinsic" value="$(arg write_extrinsic)" />
+    <param name="write_points" value="$(arg write_points)" />
+    <param name="outputFile" value="$(arg outputFile)" />
+  </node>
+
+</launch>
